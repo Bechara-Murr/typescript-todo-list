@@ -1,0 +1,132 @@
+:root{
+  --base-font-size: 16px;
+  --default-color: #fff;
+  --controls-padding: 0.7em;
+  --edit-button-padding: 0.7em 1.5em;
+  --controls-font-size: 1em;
+  --controls-label-font-size: 1.1em;
+  --controls-border-radius: 0.5em;
+  --submit-success-color: rgb(83, 226, 83);
+  --edit-button-color: rgb(0, 117, 250);
+  --form-gap-size: 1.1em;
+  --form-field-gap-size: 0.3em;
+}
+
+body{
+  background-color: #e2e2e2;
+  font-size: var(--base-font-size);
+}
+
+h1, h2, h3{
+  text-align: center;
+}
+
+p{
+  margin: 0px;
+}
+
+.page__container{
+  display: flex;
+  flex-direction: column;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin: 0px auto;
+  gap: var(--controls-font-size);
+  max-width: 400px;
+}
+
+.form__field{
+  display: flex;
+  flex-direction: column;
+  gap: var(--form-field-gap-size);
+}
+
+.form__field__label{
+  font-size: var(--controls-label-font-size);
+}
+
+.form__field__input{
+  font-size: var(--controls-font-size);
+  padding: var(--controls-padding);
+  border-radius: var(--controls-border-radius);
+  border: 0.15em solid #ddd;
+}
+
+.input__error{
+  border: 1px solid red;
+}
+
+.input__error__label{
+  color: red;
+}
+
+.form__submit__button{
+  padding: var(--controls-padding);
+  font-size: var(--controls-font-size);
+  border-radius: var(--controls-border-radius);
+  border: 0.15em solid #ddd;
+  background-color: var(--submit-success-color);
+  color: var(--default-color);
+  cursor: pointer;
+}
+
+.form__submit__button:active{
+  scale: 0.98;
+}
+
+/****************************************************/
+
+
+.tasks__list__container{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 35px auto 0px;
+}
+
+.task_row{
+  display: flex;
+  flex-direction: row;
+  flex: 2 4 auto auto;
+  justify-content: space-between;
+  padding: 0.6em 0.3em;
+  font-size: 1em;
+  background-color: #fff;
+}
+
+.task_row:nth-child(even){
+  background-color: rgb(212, 212, 212);
+}
+
+.task_title, .task_desc, .task_date{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.task_desc{
+  width: 55%;
+}
+
+.task_date{
+  width: 15%;
+}
+
+.task_title{
+  width: 20%;
+}
+
+.edit_button{  
+  padding: var(--edit-button-padding);
+  font-size: var(--controls-font-size);
+  border-radius: var(--controls-border-radius);
+  border: 0.15em solid #ddd;
+  background-color: var(--edit-button-color);
+  color: var(--default-color);
+  cursor: pointer;
+  width: 10%;
+}
