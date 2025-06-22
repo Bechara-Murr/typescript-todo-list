@@ -1,4 +1,5 @@
 import * as ValidationErrorMessages from "../Constants/ValidationErrorMessages";
+import * as RegexExpressions from "../Constants/RegularExpressions";
 
 export const setFieldErrorState = (
   errorMessage: string,
@@ -24,11 +25,7 @@ export const checkTaskFormInputValidity = (
   maxLength: number
 ): boolean => {
   const elementValue = inputElement.value;
-  if (
-    elementValue === "" ||
-    elementValue === null ||
-    elementValue === undefined
-  ) {
+  if (isNotNullEmptyorUndefined(elementValue)) {
     setFieldErrorState(
       ValidationErrorMessages.RequiredField.replace("{fieldName}", fieldName),
       errorField,
@@ -70,4 +67,64 @@ export const checkDateValidity = (
 
   // Default case where date input is null
   return false;
+};
+
+export const checkEmailValidity = (emailInput: HTMLInputElement): boolean => {
+  const emailValue = emailInput.value;
+  const emailErrorElement: HTMLElement | null =
+    document.getElementById("email__error");
+
+  if (isNotNullEmptyorUndefined(emailValue)) {
+    setFieldErrorState(
+      ValidationErrorMessages.RequiredEmail,
+      emailErrorElement,
+      emailInput
+    );
+    return false;
+  }
+
+  if (!RegexExpressions.EmailRegex.test(emailInput.value)) {
+    setFieldErrorState(
+      ValidationErrorMessages.InvalidEmail,
+      emailErrorElement,
+      emailInput
+    );
+    return false;
+  }
+
+  clearFieldErrorState(emailErrorElement, emailInput);
+
+  return true;
+};
+
+export const checkPasswordValidity = (
+  passwordInput: HTMLInputElement
+): boolean => {
+  const passwordValue = passwordInput.value;
+  const passwordErrorElement = document.getElementById("password__error");
+
+  if (isNotNullEmptyorUndefined(passwordValue)) {
+    setFieldErrorState(
+      ValidationErrorMessages.RequiredPassword,
+      passwordErrorElement,
+      passwordInput
+    );
+    return false;
+  }
+
+  if (!RegexExpressions.PasswordRegex.test(passwordValue)) {
+    setFieldErrorState(
+      ValidationErrorMessages.InvalidPassword,
+      passwordErrorElement,
+      passwordInput
+    );
+    return false;
+  }
+
+  clearFieldErrorState(passwordErrorElement, passwordInput);
+  return true;
+};
+
+const isNotNullEmptyorUndefined = (value: string): boolean => {
+  return value.trim() === "" || value === null || value === undefined;
 };

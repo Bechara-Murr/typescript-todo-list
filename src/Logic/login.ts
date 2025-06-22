@@ -1,9 +1,7 @@
 import { loginUser } from "../Utils/HelperFunctions/AuthenticationManager";
-import * as RegexExpressions from "../Utils/Constants/RegularExpressions";
-import * as ValidationErrorMessages from "../Utils/Constants/ValidationErrorMessages";
 import {
-  clearFieldErrorState,
-  setFieldErrorState,
+  checkEmailValidity,
+  checkPasswordValidity,
 } from "../Utils/HelperFunctions/InputHelperFunctions";
 
 export function init() {
@@ -35,65 +33,3 @@ export function init() {
       }
     });
 }
-
-const checkEmailValidity = (emailInput: HTMLInputElement): boolean => {
-  const emailValue = emailInput.value;
-  const emailErrorElement: HTMLElement | null =
-    document.getElementById("email__error");
-
-  if (
-    emailValue.trim() === "" ||
-    emailValue === null ||
-    emailValue === undefined
-  ) {
-    setFieldErrorState(
-      ValidationErrorMessages.RequiredEmail,
-      emailErrorElement,
-      emailInput
-    );
-    return false;
-  }
-
-  if (!RegexExpressions.EmailRegex.test(emailInput.value)) {
-    setFieldErrorState(
-      ValidationErrorMessages.InvalidEmail,
-      emailErrorElement,
-      emailInput
-    );
-    return false;
-  }
-
-  clearFieldErrorState(emailErrorElement, emailInput);
-
-  return true;
-};
-
-const checkPasswordValidity = (passwordInput: HTMLInputElement): boolean => {
-  const passwordValue = passwordInput.value;
-  const passwordErrorElement = document.getElementById("password__error");
-
-  if (
-    passwordValue.trim() === "" ||
-    passwordValue === null ||
-    passwordValue === undefined
-  ) {
-    setFieldErrorState(
-      ValidationErrorMessages.RequiredPassword,
-      passwordErrorElement,
-      passwordInput
-    );
-    return false;
-  }
-
-  if (!RegexExpressions.PasswordRegex.test(passwordValue)) {
-    setFieldErrorState(
-      ValidationErrorMessages.InvalidPassword,
-      passwordErrorElement,
-      passwordInput
-    );
-    return false;
-  }
-
-  clearFieldErrorState(passwordErrorElement, passwordInput);
-  return true;
-};

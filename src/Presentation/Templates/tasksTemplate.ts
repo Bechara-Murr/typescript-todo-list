@@ -57,5 +57,6 @@ export const tasksTemplate = `
         <h2>My Tasks</h2>
         <div id="tasks__list"></div>
     </section>
+    <button id="logout_btn" class="logout__btn">Logout</button>
     </article>
 `;

@@ -8,6 +8,7 @@
   --controls-border-radius: 0.5em;
   --submit-success-color: rgb(83, 226, 83);
   --edit-button-color: rgb(0, 117, 250);
+  --logout-button-color: rgb(67, 19, 190);
   --form-gap-size: 1.1em;
   --form-field-gap-size: 0.3em;
 }
@@ -129,4 +130,17 @@ p{
   color: var(--default-color);
   cursor: pointer;
   width: 10%;
+}
+
+.logout__btn{
+  position: fixed;
+  right: 2.5em;
+  top: 2.5em;
+  padding: var(--edit-button-padding);
+  font-size: var(--controls-font-size);
+  border-radius: var(--controls-border-radius);
+  border: 0.15em solid #ddd;
+  background-color: var(--logout-button-color);
+  color: var(--default-color);
+  cursor: pointer;
 }

@@ -1,21 +1,40 @@
 import { renderPage } from "./renderer";
 import { loginTemplate } from "../../Presentation/Templates/loginTemplate";
 import { tasksTemplate } from "../../Presentation/Templates/tasksTemplate";
+import { notFoundTemplate } from "../../Presentation/Templates/notFoundTemplate";
+import { checkUserAuthentication } from "../../Utils/HelperFunctions/AuthenticationManager";
 
-export function navigateTo(url: string) {
-  history.pushState(null, "", url);
-  handleRoute();
+export function navigationGuard(): void {
+  let path = window.location.pathname;
+  const userAuthenticated = checkUserAuthentication();
+  const targetPath = userAuthenticated ? "/tasks.html" : "/";
+
+  switch (path) {
+    case "/":
+    case "/tasks.html":
+      navigateTo(targetPath);
+      break;
+    default:
+      navigateTo("/notfound.html");
+      break;
+  }
 }
 
-export function handleRoute() {
-  const path = window.location.pathname;
-  switch (path) {
-    case "/tasks":
+export function navigateTo(url: string): void {
+  history.pushState(null, "", url);
+  handleRoute(url);
+}
+
+function handleRoute(url: string): void {
+  switch (url) {
+    case "/":
+      renderPage(loginTemplate, "login");
+      break;
+    case "/tasks.html":
       renderPage(tasksTemplate, "tasks");
       break;
-    case "/":
     default:
-      renderPage(loginTemplate, "login");
+      renderPage(notFoundTemplate, "Not found");
       break;
   }
 }
