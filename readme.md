@@ -31,6 +31,39 @@ To install and run the project run the following commands:
 
 Then navigate to the url indicated in the terminal.
 
+To login use the login credentials:
+
+- email: example@exampledomain.com
+- password: MyStrongP@ssw0rd!
+
+## Using docker
+
+The project has 2 docker files:
+
+Dockerfile: used for build purposes.
+
+Dockerfile dev setup: used for dev purposes.
+
+To use wither of the 2 modes make sure to rename the file to Dockerfile.
+
+For Production run:
+
+```bash
+  docker build -t vite-app-prod .
+  docker run -p 5173:5173 vite-app-prod
+```
+
+Then navigate to http://localhost:5173 in your browser.
+
+For development run:
+
+```bash
+  docker build -t vite-app .
+  docker run -p 5173:5173 -v "$PWD":/app vite-app
+```
+
+Then navigate to http://localhost:5173 in your browser.
+
 ## Authors
 
 - [Bechara Murr](bechara.murr@outlook.com)
